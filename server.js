@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const chalk = require('chalk');
 const ConnectDb = require('./config/config');
-const errorHandler = require('./middleware/authMiddleware');
+const errorHandler = require('./middleware/errorMiddleware');
 //Routes Path
 const authRoutes=require('./routes/authRouter');
 

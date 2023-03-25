@@ -4,7 +4,7 @@ const chalk=require('chalk')
 const ConnectDb=async ()=>{
 
     try {
-        await mongoose.connect(process.env.Mongo_URI);
+        await mongoose.connect(process.env.MONGO_URI);
         console.log(chalk.green.inverse(`Connected to DataBase - ${mongoose.connection.host}`))
         
     } catch (error) {

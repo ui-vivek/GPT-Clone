@@ -1,7 +1,6 @@
 const chalk = require("chalk");
 const userModel = require("../models/userModel");
-const errorResponce = require("../utils/errorResponce");
-const errorHandler = require("../middelwares/authMeddelware");
+const errorResponse = require("../utils/errorResponse");
 
 //JWT TOKEN
 exports.sendToken = (user, statusCode, res) => {
@@ -13,13 +12,13 @@ exports.sendToken = (user, statusCode, res) => {
 };
 
 //REGISTER
-exports.registerController = async (res, req, next) => {
+exports.registerController = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    //allready exisist user
-    const exisistingEmail = await userModel.findOne({ email });
-    if (exisistingEmail) {
-      return next(new errorResponce("Email is already registered.", 500));
+    //already existing user
+    const existingEmail = await userModel.findOne({ email });
+    if (existingEmail) {
+      return next(new errorResponse("Email is already registered.", 409));
     }
     const user = await userModel.create({ username, email, password });
     this.sendToken(user, 201, res);
@@ -28,23 +27,24 @@ exports.registerController = async (res, req, next) => {
     next(error);
   }
 };
+
 //LOGIN
 exports.loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     // validation
     if (!email || !password) {
-      return next(new errorResponce("Please email password .!"));
+      return next(new errorResponse("Please enter email and password."));
     }
     const user = await userModel.findOne({ email });
     if (!user) {
       return next(
-        new errorResponce("Please enter valid email and password .", 401)
+        new errorResponse("Please enter valid email and password.", 401)
       );
     }
-    const isMatch = await userModel.matchPassword(password);
+    const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      return next(new errorHandler("Invalid Email and Password .!", 401));
+      return next(new errorResponse("Invalid email or password.", 401));
     }
     //res
     this.sendToken(user, 200, res);
@@ -53,10 +53,11 @@ exports.loginController = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.logoutController = async (req, res) => {
   res.clearCookie("refreshToken");
   return res.status(200).json({
     success: true,
-    message: "Logout Succesfully",
+    message: "Logged out successfully.",
   });
 };

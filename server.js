@@ -5,8 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const chalk = require('chalk');
-const errorHandler = require('./middelwares/authMeddelware');
 const ConnectDb = require('./config/config');
+const errorHandler = require('./middelwares/authMeddelware');
 //Routes Path
 const authRoutes=require('./routes/authRouter');
 

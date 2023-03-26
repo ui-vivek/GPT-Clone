@@ -12,26 +12,47 @@ const Register = () => {
   const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const promise = axios.post("/api/v1/auth/register", {
+      username,
+      email,
+      password,
+    });
+    toast.promise(promise, {
+      pending: "Signing up...",
+      success: "Sign up successful",
+      error: "An error occurred while signing up",
+    });
     try {
-      await axios.post("/api/v1/auth/register", {
-        username,
-        email,
-        password,
-      });
-      toast.success("Sign Up Successfully");
-      Navigate("/login");
+      await promise;
+      setTimeout(() => {
+        Navigate("/login");
+      }, 2000);
     } catch (err) {
-      if (err.response.data.error) {
-        setError(err.response.data.error);
-        toast.error(err.response.data.error, "Something Wrong");
-      } else if (err.message) {
-        setError(err.message);
-        toast.error(err.message, "Something Wrong");
-      }
       console.log(err);
     }
   };
-  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post("/api/v1/auth/register", {
+  //       username,
+  //       email,
+  //       password,
+  //     });
+  //     toast.success("Sign Up Successfully");
+  //     Navigate("/login");
+  //   } catch (err) {
+  //     if (err.response.data.error) {
+  //       setError(err.response.data.error);
+  //       toast.error(err.response.data.error, "Something Wrong");
+  //     } else if (err.message) {
+  //       setError(err.message);
+  //       toast.error(err.message, "Something Wrong");
+  //     }
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <>
       <div className="hero min-h-screen bg-base-200">
@@ -76,6 +97,7 @@ const Register = () => {
                 </label>
                 <input
                   required
+                  minLength={6}
                   className="input input-bordered"
                   type="password"
                   aria-label="password"

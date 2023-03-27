@@ -18,7 +18,7 @@ const Summary = () => {
       let len = data.length;
       let i = 0;
       setInterval(() => {
-        if (i == len) {
+        if (i === len) {
           return;
         }
         setSummary((pre) => [...pre, data[i]]);

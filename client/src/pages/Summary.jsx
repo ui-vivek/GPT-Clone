@@ -1,24 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
 import axios from "axios";
-import {
-  Box,
-  Typography,
-  useTheme,
-  useMediaQuery,
-  TextField,
-  Button,
-  Alert,
-  Collapse,
-  Card,
-} from "@mui/material";
 
 const Summary = () => {
-  const theme = useTheme();
-  const navigate = useNavigate();
   //media
-  const isNotMobile = useMediaQuery("(min-width: 1000px)");
   // states
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
@@ -45,83 +29,52 @@ const Summary = () => {
   };
   return (
     <div
-      width={isNotMobile ? "40%" : "80%"}
-      p={"2rem"}
-      m={"2rem auto"}
-      borderRadius={5}
-      sx={{ boxShadow: 5 }}
-      backgroundColor={theme.palette.background.alt}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80vh",
+      }}
     >
-      {summary ? (
-        <>
-          <div className="mockup-window border bg-base-300 ">
-            <div className=" px-4 py-16 bg-base-200">
-              <div className="chat chat-start">
-                <div className="chat-bubble chat-bubble-primary">
-                  <p>{summary}</p>
-                </div>
-              </div>
-              <div className="chat chat-end">
-                <div className=" chat-bubble">
-                  <p>{text}</p>
-                </div>
-              </div>
+      <div style={{ position: "absolute", bottom: "20px", width: "80%" }}>
+        <div className="chat chat-start">
+          {summary ? (
+            <div className="chat-bubble chat-bubble-primary">
+              <p>{summary}</p>
             </div>
-            <form onSubmit={handleSubmit} action="">
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-primary w-full max-w-xs"
-                value={text}
-                onChange={(e) => {
-                  settext(e.target.value);
-                }}
-                multiline={true}
-                required
-                fullWidth
-              />
-              <button className="btn"><i class='bx bxs-send bx-sm'></i></button>
-            </form>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="mockup-window border bg-base-300 ">
-            <div className=" px-4 py-16 bg-base-200">
-              <div className="chat chat-start">
-                <div className="chat-bubble chat-bubble-primary">
-                  <p>{summary}</p>
-                </div>
-              </div>
-              <div className="chat chat-end">
-                <div className=" chat-bubble">
-                  <p>{text}</p>
-                </div>
-              </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="chat chat-end">
+          {text ? (
+            <div className=" chat-bubble mb-2">
+              {" "}
+              <p>{text}</p>
             </div>
-            <form onSubmit={handleSubmit} action="">
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-primary w-full max-w-xs"
-                value={text}
-                onChange={(e) => {
-                  settext(e.target.value);
-                }}
-                multiline={true}
-                required
-                fullWidth
-              />
-              <button className="btn"><i class='bx bxs-send bx-sm'></i></button>
-            </form>
-          </div>
-        </>
-      )}
-      {/* <Collapse in={error}>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      </Collapse> */}
+          ) : (
+            ""
+          )}
+        </div>
+
+        <form onSubmit={handleSubmit} className="flex justify-center">
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered input-primary w-full"
+            value={text}
+            onChange={(e) => {
+              settext(e.target.value);
+            }}
+            multiline={true}
+            required
+          />
+          <button className="btn btn-primary mx-2">
+            <i class="bx bxs-send bx-sm"></i>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ const Paragraph = () => {
     setSummary("")
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/summary", { text });
+      const { data } = await axios.post("/api/v1/openai/paragraph", { text });
       console.log(data);
       let len = data.length;
       let i = 0;

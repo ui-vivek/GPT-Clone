@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Summary from "./pages/Summary";
 import { Routes, Route } from "react-router-dom";
 import Paragraph from "./pages/Paragraph";
+import Chatbot from "./pages/Chatbot";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/summary" element={<Summary />} />
         <Route path="/paragraph" element={<Paragraph />} />
+        <Route path="/chatbot" element={<Chatbot />} />
       </Routes>
     </>
   );

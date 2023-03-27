@@ -16,7 +16,7 @@ const Home = () => {
               </div>
             </div>
           </Link>{" "}
-          <Link to={"/"}>
+          <Link to={"/paragraph"}>
             <div className="hover:bg-secondary-focus card w-64 h-48 bg-secondary text-secondary-content border-solid border-2 border-primary my-2 cursor-pointer">
               <div className="card-body flex flex-col justify-center">
                 <h2 className="card-title">Card title!</h2>

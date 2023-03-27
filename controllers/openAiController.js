@@ -75,6 +75,28 @@ exports.chatbotController = async (req, res) => {
     });
   }
 };
+//---------------------chatbot controller
+exports.codehelperController = async (req, res) => {
+  try {
+    const { text } = req.body;
+    const { data } = await openai.createCompletion({
+      model: "text-davinci-002",
+      prompt: `write the code for \n ${text}`, //this is the promt req
+      max_tokens: 300,
+      temperature: 0.23,
+    });
+    if (data) {
+      if (data.choices[0].text) {
+        return res.status(200).json(data.choices[0].text);
+      }
+    }
+  } catch (error) {
+    console.log(chalk.red.inverse(error));
+    return res.status(404).json({
+      message: error.message,
+    });
+  }
+};
 //---------------------------from Open AI
 // const response = await openai.createCompletion({
 //   model: "text-davinci-003",

@@ -7,6 +7,7 @@ import Summary from "./pages/Summary";
 import { Routes, Route } from "react-router-dom";
 import Paragraph from "./pages/Paragraph";
 import Chatbot from "./pages/Chatbot";
+import CodeHelper from "./pages/CodeHelper";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/summary" element={<Summary />} />
         <Route path="/paragraph" element={<Paragraph />} />
         <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/codehelper" element={<CodeHelper />} />
       </Routes>
     </>
   );

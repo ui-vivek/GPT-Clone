@@ -97,6 +97,27 @@ exports.codehelperController = async (req, res) => {
     });
   }
 };
+//---------------------imagegen controller
+exports.imagegenController = async (req, res) => {
+  try {
+    const { text } = req.body;
+    const { data } = await openai.createImage({
+      prompt: `Create a sci fi-image of \n ${text}`, //this is the promt req
+      n:1,
+      size:"512x512"
+    });
+    if (data) {
+      if (data.data[0].url) {
+        return res.status(200).json(data.data[0].url);
+      }
+    }
+  } catch (error) {
+    console.log(chalk.red.inverse(error));
+    return res.status(404).json({
+      message: error.message,
+    });
+  }
+};
 //---------------------------from Open AI
 // const response = await openai.createCompletion({
 //   model: "text-davinci-003",

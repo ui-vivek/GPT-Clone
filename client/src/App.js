@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Paragraph from "./pages/Paragraph";
 import Chatbot from "./pages/Chatbot";
 import CodeHelper from "./pages/CodeHelper";
+import ImageGen from "./pages/ImageGen";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/paragraph" element={<Paragraph />} />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/codehelper" element={<CodeHelper />} />
+        <Route path="/imagegen" element={<ImageGen />} />
       </Routes>
     </>
   );

@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 8000;
 const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path=require('path')
 const morgan = require("morgan");
 const chalk = require("chalk");
 const ConnectDb = require("./config/config");

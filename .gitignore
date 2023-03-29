@@ -19,7 +19,7 @@ yarn.lock
 .env.example
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store

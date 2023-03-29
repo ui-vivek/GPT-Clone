@@ -102,7 +102,7 @@ exports.imagegenController = async (req, res) => {
   try {
     const { text } = req.body;
     const { data } = await openai.createImage({
-      prompt: `Create a sci fi-image of \n ${text}`, //this is the promt req
+      prompt: `Generate a image of \n ${text}`, //this is the promt req
       n:1,
       size:"512x512"
     });

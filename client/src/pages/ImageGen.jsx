@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {  Navigate } from "react-router-dom";
+
 import axios from "axios";
 
 const ImageGen = () => {
@@ -7,6 +9,10 @@ const ImageGen = () => {
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (!loggedIn) {
+    return <Navigate to="/login" replace={true} />
+  }
 
   //register ctrl
   const handleSubmit = async (e) => {

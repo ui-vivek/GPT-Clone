@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 const Paragraph = () => {
@@ -7,10 +8,15 @@ const Paragraph = () => {
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
+  //check user is login
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (!loggedIn) {
+    return <Navigate to="/login" replace={true} />;
+  }
 
   //register ctrl
   const handleSubmit = async (e) => {
-    setSummary("")
+    setSummary("");
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/v1/openai/paragraph", { text });

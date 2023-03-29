@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link ,Navigate } from "react-router-dom";
 
 const Home = () => {
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (!loggedIn) {
+    return <Navigate to="/login" replace={true} />
+  }
   return (
     <>
       <div className="container mx-auto my-5">
@@ -11,7 +15,7 @@ const Home = () => {
               <div className="card-body flex flex-col justify-center">
                 <h2 className="card-title">Text Summry</h2>
                 <p className="mt-2">
-                  Short your larger paragraph into breife summary
+                  Summarize text like a human expert, paraphrasing.
                 </p>
               </div>
             </div>
@@ -19,9 +23,10 @@ const Home = () => {
           <Link to={"/paragraph"}>
             <div className="hover:bg-secondary-focus card w-64 h-48 bg-secondary text-secondary-content border-solid border-2 border-primary my-2 cursor-pointer">
               <div className="card-body flex flex-col justify-center">
-                <h2 className="card-title">Card title!</h2>
+                <h2 className="card-title">Paragraph</h2>
                 <p className="mt-2">
-                  If a dog chews shoes whose shoes does he choose?
+                  Generate complete paragraphs according to the instructions
+                  provided by you.
                 </p>
               </div>
             </div>
@@ -29,9 +34,10 @@ const Home = () => {
           <Link to={"/chatbot"}>
             <div className="hover:bg-secondary-focus card w-64 h-48 bg-secondary text-secondary-content border-solid border-2 border-primary my-2 cursor-pointer">
               <div className="card-body flex flex-col justify-center">
-                <h2 className="card-title">Card title!</h2>
+                <h2 className="card-title">Chat Bot</h2>
                 <p className="mt-2">
-                  If a dog chews shoes whose shoes does he choose?
+                  Eva is software that simulates human-like conversations with
+                  users via chat
                 </p>
               </div>
             </div>
@@ -39,19 +45,20 @@ const Home = () => {
           <Link to={"/codehelper"}>
             <div className="hover:bg-secondary-focus card w-64 h-48 bg-secondary text-secondary-content border-solid border-2 border-primary my-2 cursor-pointer">
               <div className="card-body flex flex-col justify-center">
-                <h2 className="card-title">Card title!</h2>
+                <h2 className="card-title">Help with code !</h2>
                 <p className="mt-2">
-                  If a dog chews shoes whose shoes does he choose?
+                  Eva can Generate Code To Help Programmers.
                 </p>
               </div>
             </div>
-          </Link> 
-           <Link to={"/imagegen"}>
+          </Link>
+          <Link to={"/imagegen"}>
             <div className="hover:bg-secondary-focus card w-64 h-48 bg-secondary text-secondary-content border-solid border-2 border-primary my-2 cursor-pointer">
               <div className="card-body flex flex-col justify-center">
-                <h2 className="card-title">Card title!</h2>
+                <h2 className="card-title">Image Generator</h2>
                 <p className="mt-2">
-                  If a dog chews shoes whose shoes does he choose?
+                  Enter your prompts and Eva convert text to image in different
+                  art styles quickly, like magic-wand.
                 </p>
               </div>
             </div>

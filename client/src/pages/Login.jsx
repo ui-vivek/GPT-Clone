@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Login = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (loggedIn) {
+    return <Navigate to="/" replace={true} />;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,7 +21,7 @@ const Login = () => {
       });
       toast.success("Sign In Successfully");
       localStorage.setItem("authToken", true);
-      Navigate("/");
+      navigate("/");
     } catch (err) {
       if (err.response.data.error) {
         toast.error(err.response.data.error, "Something Wrong");

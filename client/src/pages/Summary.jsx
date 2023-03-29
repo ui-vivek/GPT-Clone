@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {  Navigate } from "react-router-dom";
+
 
 const Summary = () => {
   //media
@@ -7,14 +9,17 @@ const Summary = () => {
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
-
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (!loggedIn) {
+    return <Navigate to="/login" replace={true} />
+  }
   //register ctrl
   const handleSubmit = async (e) => {
-    setSummary("")
+    setSummary("thinking...");
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/v1/openai/summary", { text });
-      console.log(data);
+      data ? setSummary("") : setSummary("Sorry i don't know this ...😑");
       let len = data.length;
       let i = 0;
       setInterval(() => {
@@ -70,17 +75,16 @@ const Summary = () => {
         <form onSubmit={handleSubmit} className="flex justify-center">
           <input
             type="text"
-            placeholder="Type here"
+            placeholder="type the paragraph to summarize..."
             className="input input-bordered input-primary w-full"
             value={text}
             onChange={(e) => {
               settext(e.target.value);
             }}
-            multiline={true}
             required
           />
           <button className="btn btn-primary mx-2">
-            <i class="bx bxs-send bx-sm"></i>
+            <i className="bx bxs-send bx-sm"></i>
           </button>
         </form>
       </div>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {  Navigate } from "react-router-dom";
+
 
 const CodeHelper = () => {
   //media
@@ -7,6 +9,11 @@ const CodeHelper = () => {
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
+
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (!loggedIn) {
+    return <Navigate to="/login" replace={true} />
+  }
 
   //register ctrl
   const handleSubmit = async (e) => {

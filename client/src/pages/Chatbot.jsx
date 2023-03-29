@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {  Navigate } from "react-router-dom";
+
 
 const Chatbot = () => {
   //media
@@ -7,6 +9,11 @@ const Chatbot = () => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState("");
+
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  if (!loggedIn) {
+    return <Navigate to="/login" replace={true} />
+  }
 
   //register ctrl
   const handleSubmit = async (e) => {
@@ -56,13 +63,14 @@ const Chatbot = () => {
             <div className="chat chat-start my-2">
               <div className="chat-image avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/800px-ChatGPT_logo.svg.png" />
+                  <img src={require('../images/eva.png')} />
                 </div>
               </div>
               <div className="chat-bubble chat-bubble-primary">
                 <p>{message.summary}</p>
               </div>
             </div>
+            
           </>
         ))}
 

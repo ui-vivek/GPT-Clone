@@ -18,21 +18,21 @@ const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to={"/"} className="btn btn-ghost normal-case text-xl">
-          daisyUI
+          EVA [AI]
         </Link>
       </div>
       <div className="flex-none px-4">
         {loggedIn ? (
           <Link to={"/login"} onClick={handleLogout}>
-            <button className="btn btn-circle btn-ghost px-2">LogOut</button>
+            <button className="btn  btn-ghost px-2">LogOut</button>
           </Link>
         ) : (
           <>
             <Link to={"/register"}>
-              <button className="btn btn-circle btn-ghost px-2">Sign Up</button>
+              <button className="btn  btn-ghost px-2">Sign Up</button>
             </Link>
             <Link to={"/login"}>
-              <button className="btn btn-circle btn-ghost px-2">Sign In</button>
+              <button className="btn  btn-ghost px-2">Sign In</button>
             </Link>
           </>
         )}
